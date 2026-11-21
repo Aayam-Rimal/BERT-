@@ -1,14 +1,21 @@
 import random
 
 
-def MLM(text,mask_id,random_id):
+def MLM(text,mask_id,special_tokens_id,vocab):
 
-    indices = list(range(len(text)))
+    original_indices = list(range(len(text)))
     masked_ids= text.copy()
 
-    k= round(len(indices) * 0.15)
+    indices_without_special= []
 
-    selected_ids= random.sample(indices,k)
+    for index,i in enumerate(text):
+        if i not in special_tokens_id:
+            indices_without_special.append(index)
+
+
+    k= round(len(indices_without_special) * 0.15)
+
+    selected_ids= random.sample(indices_without_special,k)
 
     first_split_percent= round(len(selected_ids) * 0.80)
     first_split= random.sample(selected_ids,first_split_percent)
@@ -21,12 +28,14 @@ def MLM(text,mask_id,random_id):
 
     second_split_percent= round(len(selected_ids) * 0.1)
     second_split= random.sample(remaining_value,second_split_percent)
+ 
+    random_id= random.sample(vocab,second_split_percent)
 
     for i in first_split:
         masked_ids[i]= mask_id
 
-    for i in second_split:
-        masked_ids[i]= random_id
+    for index_i,i in enumerate(second_split):
+           masked_ids[i]= random_id[index_i]
 
     label_id= [-100] * len(text)
 
