@@ -30,9 +30,11 @@ class FFN(nn.Module):
 
         self.W2= nn.Linear(d_ff, d_model)
 
+        self.activation= nn.GELU()
+
     def forward(self,x ):
 
-        return self.W2(torch.relu(self.W1(x)))
+        return self.W2(self.activation(self.W1(x)))
     
 
 class encoder_block(nn.Module):
