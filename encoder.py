@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch
-from .attention import MultiHeadAttention,CrossAttention
+from .attention import Attention
 
 
 class LayerNorm(nn.Module):
@@ -47,7 +47,7 @@ class encoder_block(nn.Module):
         self.ffn1= FFN(d_model,d_ff)
         self.ln1= LayerNorm(d_model,eps=1e-5)
         self.ln2= LayerNorm(d_model,eps=1e-5)
-        self.MHA= MultiHeadAttention(d_model, num_heads)
+        self.MHA= Attention(d_model, num_heads)
 
     def forward(self, src):
 
