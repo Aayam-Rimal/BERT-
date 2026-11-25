@@ -29,7 +29,7 @@ def MLM(text,mask_id,special_tokens_id,vocab):
     second_split_percent= round(len(selected_ids) * 0.1)
     second_split= random.sample(remaining_value,second_split_percent)
  
-    random_id= random.sample(vocab,second_split_percent)
+    random_id= random.sample(range(vocab),second_split_percent)
 
     for i in first_split:
         masked_ids[i]= mask_id
