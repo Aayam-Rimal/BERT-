@@ -13,7 +13,10 @@ class BertEmbedding(nn.Module):
         self.layernorm= nn.LayerNorm(d_model)
         self.dropout = nn.Dropout(0.1)
 
-    def forward(self,input_ids,token_type_ids):
+    def forward(self,input_ids,token_type_ids=None):
+
+        if token_type_ids is None:
+            token_type_ids = torch.zeros_like(input_ids)
 
         seq_len= input_ids.size(1)
 

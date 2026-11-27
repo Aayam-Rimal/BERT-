@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch
-from BertEmbedding import BertEmbedding
+from .BertEmbedding import BertEmbedding
 
 class encoder_stack(nn.Module):
 
@@ -36,7 +36,7 @@ class Transformer(nn.Module):
 
     def forward(self,src):
 
-        src= self.embedding(src)
+        src= self.embedding(src,0)
         src= self.dropout(src)
 
         enc_out= self.encoder(src)

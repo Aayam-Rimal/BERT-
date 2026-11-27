@@ -20,7 +20,7 @@ class Attention(nn.Module):
         self.Wo_proj= nn.Linear(d_model, d_model)
 
 
-    def forward(self,x, mask):
+    def forward(self,x, mask=None):
 
         B,S,D= x.shape
 

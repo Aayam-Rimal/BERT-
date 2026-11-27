@@ -1,3 +1,4 @@
 bert_tokenizer.json
 wiki_500k.txt
 test.py
+__pycache__/
